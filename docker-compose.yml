@@ -1,0 +1,15 @@
+version: '2.3'
+services:
+  object-detection-api:
+    container_name: object_detection_api
+    image: object-detection-api:latest
+    build:
+      context: ocr_api
+      dockerfile: ./Dockerfile
+    ports:
+      - "${OBJECT_DETECTION_API_PORT}:8080"
+    env_file:
+      - ocr_api/config/.env
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
